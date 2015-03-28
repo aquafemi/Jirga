@@ -26,8 +26,7 @@ class signUpHandler(sessions_module.BaseSessionHandler):
         template_params={}
         username=self.request.get('username')
         password=self.request.get('password')
-        print(username)
-        print(password)
+        android=self.request.get('android')
         use = User.all().filter('username',username)
         if use.count() == 0:
             #no collisions
@@ -44,12 +43,21 @@ class signUpHandler(sessions_module.BaseSessionHandler):
                 #invalid password
                 badPass = True
                 template_params={'success':success,'badPass':badPass}
-            render_template(self,'createUser.html',template_params)
+            if android is not None and (android)==1:
+                if(badPass):
+                    self.response.write("FAIL-BADPASS");
+                else:
+                    self.response.write("OK");
+            else:
+                render_template(self,'createUser.html',template_params)
         else:
-            #username taken
-            nameTaken = True
-            template_params={'success':success,'nameTaken':nameTaken}
-            render_template(self,'createUser.html',template_params)
+            if android is not None and (android)==1:
+                self.response.write("FAIL-BADNAME");
+            else:
+                #username taken
+                nameTaken = True
+                template_params={'success':success,'nameTaken':nameTaken}
+                render_template(self,'createUser.html',template_params)
 
 
 

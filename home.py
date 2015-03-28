@@ -26,7 +26,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 questions = Question.get(jirga.questions)
                 goodQuestions = []
                 for question in questions:
-                    if user.key not in question.voted:
+                    if question is not None and user.key not in question.voted:
                         goodQuestions.append(question)
             pubJirgas = []
             pubJirga = Jirga.all().filter('publicJirga',1).get()

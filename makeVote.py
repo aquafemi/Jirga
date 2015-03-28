@@ -24,6 +24,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     if question.author == user.username:
                         vote = Vote(answer=answerString,number=len(question.votes)+1+int(relNum),)
                         vote.put()
+                        print("vote: " + answerString)
                         question.votes.append(vote.key())
                         question.put()
                         self.response.write("OK")
