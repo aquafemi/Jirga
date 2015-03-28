@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from google.appengine.ext.webapp import template
 import webapp2
 from webapp2_extras import sessions
 import os
@@ -9,6 +10,12 @@ from model.Question import Question
 from model.Vote import Vote
 import json
 
+def render_template(handler, template_name, template_values):
+    path = os.path.join(os.path.dirname(__file__), 'templates/' + template_name)
+    html = template.render(path, template_values)
+    handler.response.out.write(html)
+
+
 class MainHandler(sessions_module.BaseSessionHandler):
 
     def get(self):
@@ -16,19 +23,22 @@ class MainHandler(sessions_module.BaseSessionHandler):
         if(user is not None):
             jirgas = Jirga.get(user.jirgas)
             for jirga in jirgas:
-                obj2 = {
-                    'name': jirga.title,
-                    'key': jirga.jirgaId,
-                }
                 questions = Question.get(jirga.questions)
                 goodQuestions = []
                 for question in questions:
                     if user.key not in question.voted:
                         goodQuestions.append(question)
-
-            self.response.out.write(json.dumps(result))
+            pubJirgas = []
+            pubJirga = Jirga.all().filter('publicJirga',1).get()
+            pubJirgas.append(pubJirga)
+            template_params = {
+                'questions':goodQuestions,
+                'jirgasmem':jirgas,
+                'jirgaspub':pubJirgas
+            }
+            render_template(self,"home.html",template_params)
         else:
             self.response.write("FAIL - not logged in")
 
-app = webapp2.WSGIApplication([('/getMyQuestions', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
 
