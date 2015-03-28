@@ -24,7 +24,7 @@ handlers:
 - url: /add2Jirga
   script: add2Jirga.app
 
-- url: /getMyJirgas
+- url: /getMyJirgas/(.*?)
   script: getMyJirgas.app
 
 - url: /getMyQuestions

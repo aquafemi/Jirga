@@ -37,12 +37,14 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <center><a href="/createUser"><h4>Make an Account</h4></a></center>
       </form>
         {% else %}
         <h2 class="form-signin-heading text-center">You're logged in, {{ user }}.</h2>
         <h3 class="form-signin-heading text-center"><a href="/">Home</a></h3>
         <h3 class="form-signin-heading text-center"><a href="/logout">Logout</a></h3>
         {% endif %}
+
     </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

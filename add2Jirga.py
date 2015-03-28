@@ -25,7 +25,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 #jirga was found
                 targetUser = self.request.get('user')
                 targetU = User.all().filter('username',targetUser).get()
-                if(targetU is not None):
+                if targetU is not None:
                     #user was found
                     if(targetJ.publicJirga == 0) and (targetJ.owner == user.username):
                         #private jirga but user owns it

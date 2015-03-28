@@ -70,7 +70,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 else:
                     self.response.write("OK")
             else:
-                render_template(self,'createUser.html',template_params)
+                self.redirect("/")
 
         else:
             if android is not None and (android)==1:

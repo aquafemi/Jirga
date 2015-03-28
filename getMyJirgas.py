@@ -9,8 +9,9 @@ import json
 
 class MainHandler(sessions_module.BaseSessionHandler):
 
-    def get(self):
-        user = self.getuser()
+    def get(self,sessId):
+        sess = Session.all().filter('sessId',sessId).get()
+        user = User.all().filter('username',sess.user)
         if(user is not None):
             jirgas = Jirga.get(user.jirgas)
             result = {}
@@ -25,4 +26,4 @@ class MainHandler(sessions_module.BaseSessionHandler):
         else:
             self.response.write("FAIL - not logged in")
 
-app = webapp2.WSGIApplication([('/getMyJirgas', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/getMyJirgas/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
