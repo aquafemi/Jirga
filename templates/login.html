@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Signin Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -19,27 +19,46 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <h2>Jirga</h2>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-right">
+              {% if not loggedIn %}
+              <a class="btn btn-default" href="#/login" role="button">Login</a>
+              {% else %}
+              <a class="btn btn-default" href="#/login" role="button">My Jirgas</a>
+              <a class="btn btn-default" href="#/login" role="button">Sign Out</a>
+              {% endif %}
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
     <div class="container">
-
-      <form class="form-signin">
+        {% if not loggedIn %}
+      <form class="form-signin" action="/login" method="POST">
+          {%if loginError %}
+                <h2 class="form-signin-heading">Failed to login with given username and password.</h2>
+            {% endif %}
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputName" class="sr-only">Username</label>
         <input name = "username" type="text" id="inputName" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name = "password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+        {% else %}
 
+        {% endif %}
     </div> <!-- /container -->
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
+
 </html>
