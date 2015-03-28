@@ -23,6 +23,10 @@ class MainHandler(sessions_module.BaseSessionHandler):
         if(user is not None):
             jirgas = Jirga.get(user.jirgas)
             for jirga in jirgas:
+                if jirga is None:
+                    jirgas = [] #to keep the thing from trying to access goodQuestions later on
+                    continue #fix for DE6
+
                 questions = Question.get(jirga.questions)
                 goodQuestions = []
                 for question in questions:
