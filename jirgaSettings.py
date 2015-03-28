@@ -3,6 +3,7 @@ import webapp2
 from webapp2_extras import sessions
 import os
 from google.appengine.ext.webapp import template
+from model.Jirga import Jirga
 import sessions_module
 from model.User import User,Session
 import uuid
@@ -14,21 +15,35 @@ def render_template(handler, template_name, template_values):
 
 class MainHandler(sessions_module.BaseSessionHandler):
 
-    def get(self):
+    def get(self,jirgaId):
         loggedIn= False
         user = self.getuser()
         if(user is not None):
-            loggedIn= True
-            uname = user.username
-            template_params={
-                'loggedIn': loggedIn,
-                'user': uname
-            }
+            jirga = Jirga.all().filter('jirgaId', jirgaId).get()
+            public = jirga.publicJirga
+            if(public == 0):
+                #private jirga
+                template_params = {
+                    'public':public,
+                }
+            else:
+                #public
+                if(user in jirga.members):
+                    #user is a member
+                    member = 1
+                else:
+                    #user is not a member
+                    member = 0
+                template_params = {
+                    'public':public,
+                    'member':member
+                }
+            member = User.get(jirga.members)
+            obj2={'members':member}
+            template_params.update(obj2)
+            render_template(self,"jirgaSettings.html",template_params)
         else:
-            template_params={
-                'loggedIn': loggedIn
-            }
-        render_template(self,'login.html',template_params)
+            self.response.write("FAIL - you need to be logged in for this")
     #post to login will receive:
     #username="username"
     #password="password"
@@ -69,4 +84,4 @@ class MainHandler(sessions_module.BaseSessionHandler):
 
 
 
-app = webapp2.WSGIApplication([('/login', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/jirgaSettings/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)

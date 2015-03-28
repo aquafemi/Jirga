@@ -39,7 +39,9 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
         {% else %}
-        <h2 class="form-signin-heading">You're already logged in.</h2>
+        <h2 class="form-signin-heading">You're logged in, {{ user }}.</h2>
+        <h3 class="form-signin-heading"><a href="/">Home</a></h3>
+        <h3 class="form-signin-heading"><a href="/logout">Logout</a></h3>
         {% endif %}
     </div> <!-- /container -->
 

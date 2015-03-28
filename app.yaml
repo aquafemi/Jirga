@@ -36,6 +36,9 @@ handlers:
 - url: /makeVote
   script: makeVote.app
 
+- url: /jirgaSettings/(.*?)
+  script: jirgaSettings.app
+
 - url: /vote
   script: vote.app
 
