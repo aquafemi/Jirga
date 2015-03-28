@@ -48,6 +48,9 @@ handlers:
 - url: /jsondump
   script: jsondump.app
 
+- url: /logout
+  script: logout.app
+
 - url: /dist/css/
   static_dir: templates/dist/css
 
