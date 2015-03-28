@@ -28,11 +28,21 @@ class MainHandler(sessions_module.BaseSessionHandler):
             public = self.request.get('option1')
             private = self.request.get('option2')
             if public is not None:
-                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=1)
-                Jirga.all().append(newJirga)
+                i = uuid.uuid1()
+                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=1,jirgaId=str(i))
+                newJirga.put()
+                user.jirgas.append(newJirga.key())
+                user.put()
+                #TODO render stuff
+                self.response.write("Success")
             elif private is not None:
-                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=0)
-                Jirga.all().append(newJirga)
+                i = uuid.uuid1()
+                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=0,jirgaId=str(i))
+                newJirga.put()
+                user.jirgas.append(newJirga.key())
+                user.put()
+                #TODO render stuff
+                self.response.write("Success")
             else:
                 self.response.write("FAIL - privacy not selected")
         else:

@@ -27,13 +27,17 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     #user was found
                     if(targetJ.publicJirga == 0) and (targetJ.owner == user.username):
                         #private jirga but user owns it
-                        user.jirgas.append(targetJ.key())
+                        targetU.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
+                        targetJ.put()
+                        targetU.put()
                         self.response.write("OK")
                     elif(targetJ.publicJirga == 1) and (targetU.username == user.username):
                         #public jirga, user is adding self
                         user.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
+                        user.put()
+                        targetJ.put()
                         self.response.write("OK")
                     else:
                         #insufficient permissions
