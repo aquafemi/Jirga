@@ -14,18 +14,43 @@ def render_template(handler, template_name, template_values):
 class MainHandler(sessions_module.BaseSessionHandler):
 
     def get(self):
-        print("yo")
+        loggedIn= False
         if self.session.get('user'):
-            self.response.out.write('User is already logged in')
+            loggedIn= True
+            user = str(self.session.get('user'))
+            template_params={
+                'loggedIn': loggedIn,
+                'user': user
+            }
+            render_template(self,'login.html',template_params)
         else:
-            self.response.out.write('User is not logged in')
+            template_params={
+                'loggedIn': loggedIn
+            }
+        render_template(self,'login.html',template_params)
     #post to login will receive:
     #username="username"
     #password="password"
     #should give user session
     def post(self):
+        loggedIn= False
         username=self.request.get('username')
-        password=self.request.get('username')
-        #uquery=User.all.
+        password=self.request.get('password')
+        use = User.all().filter('username',username)
+        if use.count() == 1:
+            #user found
+            user = use.get()
+            self.session['user']= user
+            self.redirect('/login')
+        else:
+            #no user found/something went wrong
+            self.redirect('/login')
+            template_params={
+                'loggedIn': loggedIn,
+                'loginError': True
+            }
+            render_template(self,'login.html',template_params)
+
+
 
 app = webapp2.WSGIApplication([('/login', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
