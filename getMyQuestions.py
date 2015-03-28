@@ -24,7 +24,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 }
                 questions = Question.get(jirga.questions)
                 for question in questions:
-                    if user.key not in question.voted.contains:
+                    if user.key not in question.voted:
                         obj3 = {
                             'key':question.key(),
                             'title':question.questionString,
@@ -32,12 +32,13 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         }
                         votes = Vote.get(question.votes)
                         for vote in votes:
-                            obj4 = {
-                                'vote':vote.number,
-                                'answer':vote.answer,
-                                'count':vote.count
-                            }
-                            obj3.update(obj4)
+                            if vote is not None:
+                                obj4 = {
+                                    'vote':vote.number,
+                                    'answer':vote.answer,
+                                    'count':vote.count
+                                }
+                                obj3.update(obj4)
                         obj2.update(obj3)
                         result.update(obj2)
                     #else:

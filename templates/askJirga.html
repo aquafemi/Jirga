@@ -79,35 +79,35 @@
 
                     if(success.indexOf("FAIL") <= -1) {
                         if(vvote1.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote1 }).done(function( data ) { success=data});
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote1, relNum: 0 }).done(function( data ) { success=data});
                         }
                         else{
                             alert(success);
                             fail = 1;
                         }
                         if(vvote2.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote2 }).done(function( data ) { success=data});
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote2, relNum: 1 }).done(function( data ) { success=data});
                         }
                         else{
                             alert(success);
                             fail = 1;
                         }
                         if(vvote3.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote3 }).done(function( data ) { success=data});
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote3, relNum: 2 }).done(function( data ) { success=data});
                         }
                                                 else{
                             alert(success);
                             fail = 1;
                         }
                         if(vvote4.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote4 }).done(function( data ) { success=data});
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote4, relNum: 3 }).done(function( data ) { success=data});
                         }
                                                 else{
                             alert(success);
                             fail = 1;
                         }
                         if(vvote5.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote5 }).done(function( data ) { success=data});
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote5, relNum: 5 }).done(function( data ) { success=data});
                         }
                         else{
                             alert(success);

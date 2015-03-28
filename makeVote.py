@@ -18,10 +18,11 @@ class MainHandler(sessions_module.BaseSessionHandler):
             answerString = self.request.get('answerString')
             jirga = Jirga.all().filter('jirgaId', jirgaId).get()
             question = Question.all().filter('qId',questionId).get()
+            relNum = self.request.get('relNum')
             if jirga is not None and question is not None:
                 if answerString != "" and answerString is not None:
                     if question.author == user.username:
-                        vote = Vote(answer=answerString,number=len(question.votes))
+                        vote = Vote(answer=answerString,number=len(question.votes)+1+int(relNum),)
                         vote.put()
                         question.votes.append(vote.key())
                         question.put()
