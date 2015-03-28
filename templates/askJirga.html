@@ -28,21 +28,21 @@
     <div class="container">
         <div class="well">
         <div class="btn-group">
-            <h2>Choose a Jirga:</h2>
-            <select id="jirgaselect" class="form-control">
-                {% for jirga in jirgas %}
-                        <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
-                {% endfor %}
-            </select>
+
         </div>
             </div>
 
       <div class="jumbotron">
         <h3>Pose a Question</h3>
-        <textarea id="question" class="form-control" rows="4"></textarea>
+       <form class="form-inline" action="/makeQuestion" method="POST">
+           <h2>Choose a Jirga:</h2>
+            <select name="jirgaId" id="jirgaselect" class="form-control">
+                {% for jirga in jirgas %}
+                        <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
+                {% endfor %}
+            </select>
+        <textarea name="question" id="question" class="form-control" rows="4"></textarea>
 
-
-      <div class="form-inline" action="/makeQuestion" method="POST">
           <h4>Vote 1</h4>
 
             <input name="vote1" type="text" id="input1" class="form-control"  required >
@@ -69,8 +69,9 @@
             <br><br>
 
           <button type="submit" class="btn btn-lg btn-primary" >Submit Question</button>
-    </div> <!-- /container -->
+    </form> <!-- /container -->
           </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>

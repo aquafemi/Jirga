@@ -27,23 +27,30 @@ class MainHandler(sessions_module.BaseSessionHandler):
             self.response.write("FAIL - not logged in")
 
     def post(self):
-        print(self.request)
         user = self.getuser()
         if user is not None:
             jirgaId = self.request.get('jirgaId')
-            questionString = self.request.get('questionString')
+            print(self.request)
+            questionString = self.request.get('question')
+            print(jirgaId)
             jirga = Jirga.all().filter('jirgaId', jirgaId).get()
-            vote1 = self.request.get('vote1');
-
+            votes = []
+            for x in range(1,6):
+                curr = self.request.get("vote"+str(x))
+                if curr is not None and curr != "":
+                    vote = Vote(answer=curr,number=x,count=0)
+                    print vote.answer
+                    vote.put()
+                    votes.append(vote.key())
             if jirga is not None:
-                if questionString != "" and questionString is not None:
+                if questionString != "" and questionString is not None and votes.count > 1:
                     if jirga.publicJirga == 1 or jirga.owner == user.username:
                         i = uuid.uuid1()
-                        question = Question(questionString=questionString, author=user.username,qId=(str(i)))
+                        question = Question(questionString=questionString, author=user.username,qId=(str(i)),votes=votes)
                         question.put()
                         jirga.questions.append(question.key())
                         jirga.put()
-                        self.response.out.write(question.qId)
+                        self.redirect()
                     else:
                         self.response.write("FAIL - insufficient permissions")
                 else:
