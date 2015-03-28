@@ -8,12 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add User Template</title>
+    <title>JIrga Settings Template</title>
 
      <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
-    <link href="dist/css/centered.css" rel="stylesheet">
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/assets/css/docs.min.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -23,8 +23,16 @@
 </head>
 <body>
 
-    <div class = "container">
+<!-- Docs page layout -->
+    <div class="bs-docs-header" id="content" tabindex="-1">
+      <div class="container">
+        <h2>Jirga Settings for</h2>
+          <h1>{{jirga.jirgaName}}</h1>
+      </div>
+    </div>
 
+    <div class = "container">
+        <div class="jumbotron">
             {% if public == 0 %}
             <h2>There are currently {{ members|length }} members in this Jirga.</h2>
             <select id="memberselect" class="form-control" >
@@ -36,15 +44,15 @@
             <button type="submit" class="btn btn-default" >Remove member from the Jirga</button>
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label for="user" class="col-sm-2 control-label">Add a user to the jirga</label>
+                    <label for="user" class="col-sm-2 control-label">Add a user to this Jirga:</label>
                     <div class="col-sm-7">
                         <input name = "userName" type="text" class="form-control" id="user">
                      </div>
                 </div>
-                <div class="form-horizontal" action="/addUser" method="POST">
-                    <div class="col-sm-offset-2 col-sm-10">
+                <div class="form-horizontal col-sm-offset-2 col-sm-10" action="/addUser" method="POST">
+
                         <button type="submit" class="btn btn-default">Add User</button>
-                     </div>
+
                 </div>
             </form>
             {% else %}
@@ -62,6 +70,7 @@
                     <button type="submit" class="btn btn-default">Remove me from this Jirga!</button>
                 {% endif %}
             {% endif %}
+            </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

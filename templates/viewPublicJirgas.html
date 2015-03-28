@@ -8,40 +8,45 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Make Jirga Template</title>
+    <title>View Public Jirgas Template</title>
 
-     <!-- Bootstrap core CSS -->
-    <link href="https://bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
-<body>
 
-    <div class = "container text-center">
-        <form class="form-group" action = "makeJirga" method="POST">
-            <input name="jirgaName" type="text" class="input-large" placeholder="Jirga Name" required="required">
-            <label class="radio">
-                <input type="radio" name="privacyOption" id = "public"
-                       value="option1" required> Public
-            </label>
-             <label class="radio">
-                <input type="radio" name="privacyOption" id = "private"
-                        value="option2" required> Private
-            </label>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+</head>
+ <body>
+
+
+    <div class="container">
+        <div class="well">
+        <div class="btn-group">
+            <h2>Choose a Jirga:</h2>
+            <select id="jirgaselect" class="form-control">
+                {% for jirga in jirgas %}
+                        <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            </div>
+
+      <div class="jumbotron">
+        <h3>Pose a Question</h3>
+        <textarea id="question" class="form-control" rows="4"></textarea>
+      </div>
+
+    </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
-
-</body>
+  </body>
 </html>

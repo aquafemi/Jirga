@@ -1,29 +1,54 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home Page Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
 </head>
 <body>
-<h1>Here are the jirga questions on which you can vote:</h1>
-<ul class="jirga-memberships">
-    {% for question in questions %}
-        <li class="list-group-item"><a href="viewQuestion/{{question.qId}}">{{question.questionString}}</a></li>
-    {% endfor %}
-</ul>
-<h1>Here are the jirgas in which you are a member or owner:</h1>
-<ul class="jirga-memberships">
-    {% for jirga in jirgasmem %}
-        <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
-    {% endfor %}
-</ul>
-<h1>Here are some public jirgas you may want to join:</h1>
-<ul class="public-jirgas">
-    {% for jirga in jirgaspub %}
-        <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
-    {% endfor %}
-</ul>
-<a href="/makeQuestion"><h1>Ask your jirgas a question.</h1></a>
-<a href="/makeJirga"><h1>Make a new jirga.</h1></a>
+
+    <div class="container">
+        <h1>Here are the Jirga questions on which you can vote:</h1>
+        <ul class="jirga-memberships">
+        {% for question in questions %}
+            <li class="list-group-item"><a href="viewQuestion/{{question.qId}}">{{question.questionString}}</a></li>
+        {% endfor %}
+        </ul>
+        <h1>Here are the Jirgas in which you are a member or owner:</h1>
+        <ul class="jirga-memberships">
+        {% for jirga in jirgasmem %}
+            <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
+        {% endfor %}
+        </ul>
+        <h1>Here are some public Jirgas you may want to join:</h1>
+        <ul class="public-jirgas">
+        {% for jirga in jirgaspub %}
+            <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
