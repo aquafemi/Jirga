@@ -51,6 +51,9 @@ handlers:
 - url: /logout
   script: logout.app
 
+- url: /json/login
+  script: jsonLogin.app
+
 - url: /dist/css/
   static_dir: templates/dist/css
 

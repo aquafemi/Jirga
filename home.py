@@ -39,6 +39,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
             #check to avoid throwing unbounderror when no jirgas
             #todo - make this give a warning when no jirgas
             if len(jirgas) < 1:
+                print("WOO")
                 template_params = {
                     'jirgasmem':jirgas,
                     'jirgaspub':pubJirgas
@@ -51,7 +52,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 }
             render_template(self,"home.html",template_params)
         else:
-            self.response.write("FAIL - not logged in")
+            self.redirect("/login")
 
 app = webapp2.WSGIApplication([('/', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
 

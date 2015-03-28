@@ -28,6 +28,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 vote.put()
                 question.voted.append(user.key)
                 question.put()
+                self.redirect()
         else:
             self.response.write("FAIL - not logged in")
 
