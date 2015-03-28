@@ -29,20 +29,20 @@
         
       <form class="form-signin" action="/createUser" method="POST">
           {% if success %}
-            <h3 class="form-signin-heading">Account successfully created.</h2>
+            <h3 class="form-signin-heading">Account successfully created.</h3>
           {% else %}
           {% if badPass %}
-            <h3 class="form-signin-heading">Password incorrect.</h2>
+            <h3 class="form-signin-heading">Password incorrect.</h3>
           {% endif %}
           {% if nameTaken %}
-            <h3 class="form-signin-heading">Username taken.</h2>
+            <h3 class="form-signin-heading">Username taken.</h3>
           {% endif %}
         <h2 class="form-signin-heading">Create New Account</h2>
         <label for="inputName" class="sr-only">Desired Username</label>
         <input type="text" id="inputName" class="form-control" placeholder="Desired Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
       </form>
       {% endif %}
 
