@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href=" http://getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 </head>
  <body>
@@ -21,45 +22,85 @@
     <div class="container">
         <div class="well">
         <div class="btn-group">
-            <button class="btn dropdown-toggle" data-toggle="dropdown">Jirgas
-                </button>
-            <ul class="dropdown-menu">
-            </ul>
+            <h2>Choose a Jirga:</h2>
+            <select id="jirgaselect" class="form-control">
+                {% for jirga in jirgas %}
+                        <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
+                {% endfor %}
+            </select>
         </div>
             </div>
 
       <div class="jumbotron">
         <h3>Pose a Question</h3>
-        <textarea class="form-control" rows="4"></textarea>
+        <textarea id="question" class="form-control" rows="4"></textarea>
       </div>
 
       <div class="form-inline" action="askJirga" method="POST">
           <h4>Vote 1</h4>
-          <label for="input1" class="sr-only">Desired Username</label>
+
             <input name="vote1" type="text" id="input1" class="form-control"  required >
             <br>
 
           <h4>Vote 2</h4>
-          <label for="input2" class="sr-only">Desired Username</label>
+
             <input name="vote2" type="text" id="input2" class="form-control"  required>
             <br>
 
           <h4>Vote 3</h4>
-          <label for="input3" class="sr-only">Desired Username</label>
+
              <input name="vote3" type="text" id="input3" class="form-control">
             <br>
 
           <h4>Vote 4</h4>
-          <label for="input4" class="sr-only">Desired Username</label>
+
             <input name="vote4" type="text" id="input4" class="form-control">
             <br>
 
           <h4>Vote 5</h4>
-          <label for="input5" class="sr-only">Desired Username</label>
+
             <input name="vote5" type="text" id="input5" class="form-control">
             <br><br>
 
           <button type="submit" class="btn btn-lg btn-primary" >Submit Question</button>
+          <script>
+              $(function(){
+                    $("button").click(function(){
+                    var vjirgaId = $(jirgaselect).val();
+                    var vquestion = $(question).val();
+                    var vvote1 = $(input1).val();
+                    var vvote2 = $(input2).val();
+                    var vvote3 = $(input3).val();
+                    var vvote4 = $(input4).val();
+                    var vvote5 = $(input5).val();
+                    var success;
+                    $.post( "/makeQuestion", { jirgaId: vjirgaId, questionString: vquestion }).done(function( data ) { success=data;
+
+                    if(success.indexOf("FAIL") <= -1) {
+                        if(vvote1.length>0) {
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote1 }).done(function( data ) { success=data});
+                        }
+                        if(vvote2.length>0) {
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote2 }).done(function( data ) { success=data});
+                        }
+                        if(vvote3.length>0) {
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote3 }).done(function( data ) { success=data});
+                        }
+                        if(vvote4.length>0) {
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote4 }).done(function( data ) { success=data});
+                        }
+                        if(vvote5.length>0) {
+                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote5 }).done(function( data ) { success=data});
+                        }
+                    }
+                    else{
+                        alert(success);
+                    }
+
+                    });
+                    });
+                        });
+          </script>
         </div>
 
     </div> <!-- /container -->

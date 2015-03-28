@@ -14,13 +14,16 @@ class MainHandler(sessions_module.BaseSessionHandler):
         if user is not None:
             jirgaId = self.request.get('jirgaId')
             questionId = self.request.get('questionId')
+            print(questionId)
             answerString = self.request.get('answerString')
             jirga = Jirga.all().filter('jirgaId', jirgaId).get()
-            question = Question.get(questionId)
+            question = Question.all().filter('qId',questionId).get()
             if jirga is not None and question is not None:
                 if answerString != "" and answerString is not None:
                     if question.author == user.username:
-                        question.votes.append(Vote(answer=answerString,number=len(question.votes)+1))
+                        vote = Vote(answer=answerString,number=len(question.votes))
+                        vote.put()
+                        question.votes.append(vote.key())
                         question.put()
                         self.response.write("OK")
                     else:
@@ -28,9 +31,11 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 else:
                     self.response.write("FAIL")
             else:
+
                 self.response.write("FAIL")
         else:
+
             self.response.write("FAIL - not logged in")
 
 
-app = webapp2.WSGIApplication([('/makeQuestion', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/makeVote', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
