@@ -9,8 +9,23 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: .*
+- url: /
   script: main.app
+
+- url: /login
+  script: login.app
+
+- url: /signup
+  script: signup.app
+
+- url: /dist/css/
+  static_dir: templates/dist/css
+
+- url: /dist/fonts/
+  static_dir: templates/dist/fonts
+
+- url: /dist/js/
+  static_dir: templates/dist/js
 
 libraries:
 - name: webapp2
