@@ -17,7 +17,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
         user = self.getuser()
         if(user is not None):
             jirgaId = self.request.get('jirgaId')
-            jirga = Jirga.all().filter('jirgaId',jirgaId)
+            jirga = Jirga.all().filter('jirgaId',jirgaId).get()
             questionKey = self.request.get('questionKey')
             question = Question.get(questionKey)
             if user.key not in question.voted and user.key in jirga.members:
