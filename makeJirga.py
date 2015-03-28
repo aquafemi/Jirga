@@ -5,6 +5,7 @@ import os
 from google.appengine.ext.webapp import template
 import sessions_module
 from model.User import User,Session
+from model.Jirga import Jirga
 import uuid
 
 def render_template(handler, template_name, template_values):
@@ -21,6 +22,20 @@ class MainHandler(sessions_module.BaseSessionHandler):
     #jirga name
     #whether it is public or private
     def post(self):
-        
+        user = self.getuser()
+        if(user is not None):
+            jirgaName = self.request.get('jirgaName')
+            public = self.request.get('option1')
+            private = self.request.get('option2')
+            if public is not None:
+                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=1)
+                Jirga.all().append(newJirga)
+            elif private is not None:
+                newJirga = Jirga(title=jirgaName,owner=user.username,publicJirga=0)
+                Jirga.all().append(newJirga)
+            else:
+                self.response.write("FAIL - privacy not selected")
+        else:
+            self.response.write("FAIL - not logged in")
 
 app = webapp2.WSGIApplication([('/makeJirga', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
