@@ -29,6 +29,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 'loggedIn': loggedIn
             }
         render_template(self,'login.html',template_params)
+
     #post to login will receive:
     #username="username"
     #password="password"
