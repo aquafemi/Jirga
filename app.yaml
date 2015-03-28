@@ -15,7 +15,7 @@ handlers:
 - url: /login
   script: login.app
 
-- url: /signup
+- url: /createUser
   script: signup.app
 
 - url: /dist/css/

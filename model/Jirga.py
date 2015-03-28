@@ -1,6 +1,7 @@
 from google.appengine.ext import db
 
 class Jirga(db.Model):
+    title = db.StringProperty()
     members = db.ListProperty(db.Key)
     owner = db.ListProperty(db.Key)
     questions = db.ListProperty(db.Key)
