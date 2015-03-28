@@ -34,20 +34,29 @@ class MainHandler(sessions_module.BaseSessionHandler):
     #should give user session
     def post(self):
         loggedIn= False
-        username=self.request.get('username')
+        username=self.request.get('inputName')
         password=self.request.get('password')
         use = User.all().filter('username',username)
         if use.count() == 1:
             #user found
             user = use.get()
-            self.session['user']= user
-            self.redirect('/login')
+            if(user.password == pasword):
+                self.session['user']= user
+                self.redirect('/login')
+            else:
+                #no user found/something went wrong
+                loginError = True
+                template_params={
+                    'loggedIn': loggedIn,
+                    'loginError': loginError,
+                }
+                render_template(self,'login.html',template_params)
         else:
             #no user found/something went wrong
-            self.redirect('/login')
+            loginError = True
             template_params={
                 'loggedIn': loggedIn,
-                'loginError': True
+                'loginError': loginError,
             }
             render_template(self,'login.html',template_params)
 

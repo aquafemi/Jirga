@@ -18,6 +18,15 @@ handlers:
 - url: /signup
   script: signup.app
 
+- url: /dist/css/
+  static_dir: templates/dist/css
+
+- url: /dist/fonts/
+  static_dir: templates/dist/fonts
+
+- url: /dist/js/
+  static_dir: templates/dist/js
+
 libraries:
 - name: webapp2
   version: "2.5.2"

@@ -31,21 +31,26 @@
   <body>
 
     <div class="container">
-
-      <form class="form-signin">
+        {% if not loggedIn %}
+      <form class="form-signin" action="/login" method="POST">
+          {%if loginError %}
+                <h2 class="form-signin-heading">Failed to login with given username and password.</h2>
+            {% endif %}
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputName" class="sr-only">Username</label>
         <input type="text" id="inputName" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
+        <!-- <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
-        </div>
+        </div> -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+        {% else %}
 
+        {% endif %}
     </div> <!-- /container -->
 
 
