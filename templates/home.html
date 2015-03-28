@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>Here are the jirga questions on which you can vote:</h1>
+<ul class="jirga-memberships">
+    {% for question in questions %}
+        <li class="list-group-item"><a href="jirgaSettings/{{question.qId}}">{{question.questionString}}</a></li>
+    {% endfor %}
+</ul>
+<h1>Here are the jirgas in which you are a member:</h1>
+<ul class="jirga-memberships">
+    {% for jirga in jirgasmem %}
+        <li class="list-group-item"><a href="viewQuestion/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
+    {% endfor %}
+</ul>
+<h1>Here are the some public jirgas you may want to join:</h1>
+<ul class="public-jirgas">
+    {% for jirga in jirgasmem %}
+        <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
