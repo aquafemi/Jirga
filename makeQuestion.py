@@ -1,5 +1,6 @@
 import json
 from google.appengine.ext import db
+import time
 import webapp2
 from webapp2_extras import sessions
 import os
@@ -50,7 +51,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         question.put()
                         jirga.questions.append(question.key())
                         jirga.put()
-                        self.redirect()
+                        time.sleep(.5)
+                        self.redirect("/viewQuestion/"+question.qId)
                     else:
                         self.response.write("FAIL - insufficient permissions")
                 else:
