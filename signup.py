@@ -45,14 +45,14 @@ class signUpHandler(sessions_module.BaseSessionHandler):
                 template_params={'success':success,'badPass':badPass}
             if android is not None and (android)==1:
                 if(badPass):
-                    self.response.write("FAIL-BADPASS");
+                    self.response.write("FAIL-BADPASS")
                 else:
-                    self.response.write("OK");
+                    self.response.write("OK")
             else:
                 render_template(self,'createUser.html',template_params)
         else:
             if android is not None and (android)==1:
-                self.response.write("FAIL-BADNAME");
+                self.response.write("FAIL-BADNAME")
             else:
                 #username taken
                 nameTaken = True
