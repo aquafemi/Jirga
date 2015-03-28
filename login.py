@@ -37,6 +37,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
         loggedIn= False
         username=self.request.get('username')
         password=self.request.get('password')
+        android=self.request.get('android')
         use = User.all().filter('username',username)
         if use.count() == 1:
             #user found
@@ -46,6 +47,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 sess = Session(user=user.username,sessId=str(i))
                 sess.put()
                 self.session['sessId']=str(i)
+                badPass = False
                 loggedIn = True
                 template_params={'loggedIn':loggedIn,
                                 'user': user.username}
@@ -58,14 +60,28 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     'loginError': loginError,
                 }
                 render_template(self,'login.html',template_params)
+
+            if android is not None and (android)==1:
+                if(badPass):
+                    self.response.write("FAIL-BADPASS")
+                if(loginError):
+                    self.response.write("FAIL-LOGINERROR")
+                else:
+                    self.response.write("OK")
+            else:
+                render_template(self,'createUser.html',template_params)
+
         else:
-            #no user found/something went wrong
-            loginError = True
-            template_params={
-                'loggedIn': loggedIn,
-                'loginError': loginError,
-            }
-            render_template(self,'login.html',template_params)
+            if android is not None and (android)==1:
+                self.response.write("FAIL-BADNAME")
+            else:
+                #no user found/something went wrong
+                loginError = True
+                template_params={
+                    'loggedIn': loggedIn,
+                    'loginError': loginError,
+                }
+                render_template(self,'login.html',template_params)
 
 
 
