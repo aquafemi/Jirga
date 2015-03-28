@@ -16,8 +16,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
     def post(self):
         user = self.getuser()
         if(user is not None):
-            jirgaKey = self.request.get('jirgaKey')
-            jirga = Jirga.get(jirgaKey)
+            jirgaId = self.request.get('jirgaId')
+            jirga = Jirga.all().filter('jirgaId',jirgaId)
             questionKey = self.request.get('questionKey')
             question = Question.get(questionKey)
             if user.key not in question.voted and user.key in jirga.members:
