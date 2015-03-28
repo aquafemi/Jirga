@@ -31,11 +31,20 @@ class MainHandler(sessions_module.BaseSessionHandler):
             pubJirgas = []
             pubJirga = Jirga.all().filter('publicJirga',1).get()
             pubJirgas.append(pubJirga)
-            template_params = {
-                'questions':goodQuestions,
-                'jirgasmem':jirgas,
-                'jirgaspub':pubJirgas
-            }
+
+            #check to avoid throwing unbounderror when no jirgas
+            #todo - make this give a warning when no jirgas
+            if len(jirgas) < 1:
+                template_params = {
+                    'jirgasmem':jirgas,
+                    'jirgaspub':pubJirgas
+                }
+            else:
+                template_params = {
+                    'questions':goodQuestions, #throws exception when goodQuestions not initialized (due to no Jirgas)
+                    'jirgasmem':jirgas,
+                    'jirgaspub':pubJirgas
+                }
             render_template(self,"home.html",template_params)
         else:
             self.response.write("FAIL - not logged in")
