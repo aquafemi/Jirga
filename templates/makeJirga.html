@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AddJirga Template</title>
+
+     <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class = "container">
+        <center></center>
+        <form class="form-inline" action = "makeJirga" method="POST">
+            <input type="text" class="input-small" placeholder="Jirga Name" required>
+            <label class="radio">
+                <input type="radio" name="privacyOption" id = "public"
+                       value="option1" required> Public
+            </label>
+             <label class="radio">
+                <input type="radio" name="privacyOption" id = "private"
+                        value="option2" required> Private
+            </label>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
