@@ -20,7 +20,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
             jirga = Jirga.get(jirgaKey)
             questionKey = self.request.get('questionKey')
             question = Question.get(questionKey)
-            if user.key not in question.voted && user.key is in jirga.members:
+            if user.key not in question.voted and user.key in jirga.members:
                 voteNum = self.request.get('voteNum')
                 vote = Vote.get(Question.votes.index(voteNum-1))
                 vote.users.append(user.key)
