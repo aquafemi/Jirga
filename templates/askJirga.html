@@ -74,23 +74,48 @@
                     var vvote4 = $(input4).val();
                     var vvote5 = $(input5).val();
                     var success;
+                        var fail = 0;
                     $.post( "/makeQuestion", { jirgaId: vjirgaId, questionString: vquestion }).done(function( data ) { success=data;
 
                     if(success.indexOf("FAIL") <= -1) {
                         if(vvote1.length>0) {
                             $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote1 }).done(function( data ) { success=data});
                         }
+                        else{
+                            alert(success);
+                            fail = 1;
+                        }
                         if(vvote2.length>0) {
                             $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote2 }).done(function( data ) { success=data});
+                        }
+                        else{
+                            alert(success);
+                            fail = 1;
                         }
                         if(vvote3.length>0) {
                             $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote3 }).done(function( data ) { success=data});
                         }
+                                                else{
+                            alert(success);
+                            fail = 1;
+                        }
                         if(vvote4.length>0) {
                             $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote4 }).done(function( data ) { success=data});
                         }
+                                                else{
+                            alert(success);
+                            fail = 1;
+                        }
                         if(vvote5.length>0) {
                             $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote5 }).done(function( data ) { success=data});
+                        }
+                        else{
+                            alert(success);
+                            fail = 1;
+                        }
+                        if(fail==0) {
+                            alert("Question created!");
+                            window.location = "/";
                         }
                     }
                     else{
