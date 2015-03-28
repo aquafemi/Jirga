@@ -30,6 +30,9 @@ handlers:
 - url: /getMyQuestions
   script: getMyQuestions.app
 
+- url: /vote
+  script: vote.app
+
 - url: /jsondump
   script: jsondump.app
 
