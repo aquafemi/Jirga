@@ -8,11 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home Page Template</title>
+    <title>View Public Jirgas Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,35 +20,33 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
 </head>
-<body>
+ <body>
+
 
     <div class="container">
-        <h1>Here are the Jirga questions on which you can vote:</h1>
-        <ul class="jirga-memberships">
-        {% for question in questions %}
-            <li class="list-group-item"><a href="viewQuestion/{{question.qId}}">{{question.questionString}}</a></li>
-        {% endfor %}
-        </ul>
-        <h1>Here are the Jirgas in which you are a member or owner:</h1>
-        <ul class="jirga-memberships">
-        {% for jirga in jirgasmem %}
-            <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
-        {% endfor %}
-        </ul>
-        <h1>Here are some public Jirgas you may want to join:</h1>
-        <ul class="public-jirgas">
-        {% for jirga in jirgaspub %}
-            <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
-        {% endfor %}
-        </ul>
-    </div>
+        <div class="well">
+        <div class="btn-group">
+            <h2>Choose a Jirga:</h2>
+            <select id="jirgaselect" class="form-control">
+                {% for jirga in jirgas %}
+                        <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            </div>
+
+      <div class="jumbotron">
+        <h3>Pose a Question</h3>
+        <textarea id="question" class="form-control" rows="4"></textarea>
+      </div>
+
+    </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
-</body>
+  </body>
 </html>
