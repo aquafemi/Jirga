@@ -14,7 +14,6 @@ class MainHandler(sessions_module.BaseSessionHandler):
         if user is not None:
             jirgaId = self.request.get('jirgaId')
             questionId = self.request.get('questionId')
-            print(questionId)
             answerString = self.request.get('answerString')
             jirga = Jirga.all().filter('jirgaId', jirgaId).get()
             question = Question.all().filter('qId',questionId).get()
@@ -24,6 +23,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     if question.author == user.username:
                         vote = Vote(answer=answerString,number=len(question.votes)+1+int(relNum),)
                         vote.put()
+                        print("vote: " + answerString)
                         question.votes.append(vote.key())
                         question.put()
                         self.response.write("OK")

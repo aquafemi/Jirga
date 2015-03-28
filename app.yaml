@@ -40,13 +40,16 @@ handlers:
   script: jirgaSettings.app
 
 - url: /viewQuestion/(.*?)
-  script: jirgaSettings.app
+  script: viewQuestion.app
 
 - url: /vote
   script: vote.app
 
 - url: /jsondump
   script: jsondump.app
+
+- url: /logout
+  script: logout.app
 
 - url: /dist/css/
   static_dir: templates/dist/css

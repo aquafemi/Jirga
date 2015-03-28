@@ -7,6 +7,7 @@ from model.Question import Question
 from model.Jirga import Jirga
 import sessions_module
 from model.User import User,Session
+from model.Vote import Vote
 import uuid
 
 def render_template(handler, template_name, template_values):
@@ -21,12 +22,15 @@ class MainHandler(sessions_module.BaseSessionHandler):
         user = self.getuser()
         if(user is not None):
             question = Question.all().filter('qId', questionId).get()
-
-            render_template(self,"jirgaSettings.html",template_params)
+            votes = Vote.get(question.votes)
+            template_params = {
+                'question': question,
+                'votes': votes
+            }
+            
+            render_template(self,"viewQuestion.html",template_params)
         else:
             self.response.write("FAIL - you need to be logged in for this")
-
-    def post(self):
 
 
 
