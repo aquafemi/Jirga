@@ -45,14 +45,12 @@
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="user" class="col-sm-2 control-label">Add a user to this Jirga:</label>
-                    <div class="col-sm-7">
+                    <div class="col-sm-9">
                         <input name = "userName" type="text" class="form-control" id="user">
                      </div>
-                </div>
-                <div class="form-horizontal col-sm-offset-2 col-sm-10" action="/addUser" method="POST">
-
+                    <div class="form-horizontal" action="/addUser" method="POST">
                         <button type="submit" class="btn btn-default">Add User</button>
-
+                    </div>
                 </div>
             </form>
             {% else %}
