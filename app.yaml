@@ -27,6 +27,8 @@ handlers:
 - url: /getMyJirgas
   script: getMyJirgas.app
 
+- url: /getMyQuestions
+  script: getMyQuestions.app
 
 - url: /jsondump
   script: jsondump.app
