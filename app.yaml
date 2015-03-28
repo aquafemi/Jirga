@@ -18,6 +18,15 @@ handlers:
 - url: /createUser
   script: signup.app
 
+- url: /makeJirga
+  script: makeJirga.app
+
+- url: /add2Jirga
+  script: add2Jirga.app
+
+- url: /jsondump
+  script: jsondump.app
+
 - url: /dist/css/
   static_dir: templates/dist/css
 
