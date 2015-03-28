@@ -41,6 +41,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
             member = User.get(jirga.members)
             obj2={'members':member}
             template_params.update(obj2)
+            template_params.update({'user':user})
+            template_params.update({'jirga':jirga})
             render_template(self,"jirgaSettings.html",template_params)
         else:
             self.response.write("FAIL - you need to be logged in for this")

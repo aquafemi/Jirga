@@ -12,6 +12,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
     #jirga ID
     #user name to add
     def post(self):
+        print(self.request)
         user = self.getuser()
         if(user is not None):
             #check if user has permission to add target user to jirga
