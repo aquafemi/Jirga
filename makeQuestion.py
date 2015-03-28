@@ -27,11 +27,14 @@ class MainHandler(sessions_module.BaseSessionHandler):
             self.response.write("FAIL - not logged in")
 
     def post(self):
+        print(self.request)
         user = self.getuser()
         if user is not None:
             jirgaId = self.request.get('jirgaId')
             questionString = self.request.get('questionString')
             jirga = Jirga.all().filter('jirgaId', jirgaId).get()
+            vote1 = self.request.get('vote1');
+
             if jirga is not None:
                 if questionString != "" and questionString is not None:
                     if jirga.publicJirga == 1 or jirga.owner == user.username:

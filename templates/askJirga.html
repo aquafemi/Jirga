@@ -40,9 +40,9 @@
       <div class="jumbotron">
         <h3>Pose a Question</h3>
         <textarea id="question" class="form-control" rows="4"></textarea>
-      </div>
 
-      <div class="form-inline" action="askJirga" method="POST">
+
+      <div class="form-inline" action="/makeQuestion" method="POST">
           <h4>Vote 1</h4>
 
             <input name="vote1" type="text" id="input1" class="form-control"  required >
@@ -69,72 +69,8 @@
             <br><br>
 
           <button type="submit" class="btn btn-lg btn-primary" >Submit Question</button>
-          <script>
-              $(function(){
-                    $("button").click(function(){
-                    var vjirgaId = $(jirgaselect).val();
-                    var vquestion = $(question).val();
-                    var vvote1 = $(input1).val();
-                    var vvote2 = $(input2).val();
-                    var vvote3 = $(input3).val();
-                    var vvote4 = $(input4).val();
-                    var vvote5 = $(input5).val();
-                    var success;
-                        var fail = 0;
-                    $.post( "/makeQuestion", { jirgaId: vjirgaId, questionString: vquestion }).done(function( data ) { success=data;
-
-                    if(success.indexOf("FAIL") <= -1) {
-                        if(vvote1.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote1, relNum: 0 }).done(function( data ) { success=data});
-                        }
-                        else{
-                            alert(success);
-                            fail = 1;
-                        }
-                        if(vvote2.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote2, relNum: 1 }).done(function( data ) { success=data});
-                        }
-                        else{
-                            alert(success);
-                            fail = 1;
-                        }
-                        if(vvote3.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote3, relNum: 2 }).done(function( data ) { success=data});
-                        }
-                                                else{
-                            alert(success);
-                            fail = 1;
-                        }
-                        if(vvote4.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote4, relNum: 3 }).done(function( data ) { success=data});
-                        }
-                                                else{
-                            alert(success);
-                            fail = 1;
-                        }
-                        if(vvote5.length>0) {
-                            $.post( "/makeVote", { jirgaId: vjirgaId, questionId:success , answerString: vvote5, relNum: 5 }).done(function( data ) { success=data});
-                        }
-                        else{
-                            alert(success);
-                            fail = 1;
-                        }
-                        if(fail==0) {
-                            alert("Question created!");
-                            window.location = "/";
-                        }
-                    }
-                    else{
-                        alert(success);
-                    }
-
-                    });
-                    });
-                        });
-          </script>
-        </div>
-
     </div> <!-- /container -->
+          </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
