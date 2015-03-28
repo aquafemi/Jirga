@@ -24,6 +24,10 @@ handlers:
 - url: /add2Jirga
   script: add2Jirga.app
 
+- url: /getMyJirgas
+  script: getMyJirgas.app
+
+
 - url: /jsondump
   script: jsondump.app
 
