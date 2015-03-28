@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+import time
 import webapp2
 from webapp2_extras import sessions
 import os
@@ -32,14 +33,17 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         targetJ.members.append(targetU.key())
                         targetJ.put()
                         targetU.put()
-                        self.response.write("OK")
+                        #todo get rid of these time.sleeps start having better data routes
+                        time.sleep(1)
+                        self.redirect("/jirgaSettings/"+targetJirga.jirgaId)
                     elif(targetJ.publicJirga == 1) and (targetU.username == user.username):
                         #public jirga, user is adding self
                         user.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
                         user.put()
                         targetJ.put()
-                        self.response.write("OK")
+                        time.sleep(1)
+                        self.redirect("/jirgaSettings/"+targetJ.jirgaId)
                     else:
                         #insufficient permissions
                         self.response.write("FAIL - insufficient permissions")
