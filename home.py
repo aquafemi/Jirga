@@ -22,27 +22,29 @@ class MainHandler(sessions_module.BaseSessionHandler):
         user = self.getuser()
         if(user is not None):
             jirgas = Jirga.get(user.jirgas)
+            newlist=[]
+            idList=[]
+            goodQuestions = []
             for jirga in jirgas:
-                if jirga is None:
-                    jirgas = [] #to keep the thing from trying to access goodQuestions later on
-                    continue #fix for DE6
+                if jirga is not None and jirga.jirgaId not in idList:
+                    newlist.append(jirga)
+                    idList.append(jirga.jirgaId)
+                    for qkey in jirga.questions:
+                        question = Question.get(qkey)
+                        if question is not None and user.key not in question.voted:
+                            goodQuestions.append(question)
 
-                questions = Question.get(jirga.questions)
-                goodQuestions = []
-                for question in questions:
-                    if question is not None and user.key not in question.voted:
-                        goodQuestions.append(question)
             pubJirgas = []
             pubJirga = Jirga.all().filter('publicJirga',1).get()
             pubJirgas.append(pubJirga)
 
             #check to avoid throwing unbounderror when no jirgas
             #todo - make this give a warning when no jirgas
-            if len(jirgas) < 1:
-                print("WOO")
+            if len(newlist) < 1:
                 template_params = {
-                    'jirgasmem':jirgas,
-                    'jirgaspub':pubJirgas
+                    'jirgasmem':newlist,
+                    'jirgaspub':pubJirgas,
+                    'questions':goodQuestions
                 }
             else:
                 template_params = {
