@@ -7,3 +7,9 @@ class Jirga(db.Model):
     questions = db.ListProperty(db.Key)
     publicJirga = db.IntegerProperty() #0 if private, 1 if public
     jirgaId = db.StringProperty()
+    modVotes = db.ListProperty(db.Key)
+
+class ModVote(db.Model):
+    jirgaId = db.StringProperty()
+    user = db.Key()
+    reward = db.IntegerProperty()
