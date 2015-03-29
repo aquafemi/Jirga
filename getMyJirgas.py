@@ -16,14 +16,14 @@ class MainHandler(sessions_module.BaseSessionHandler):
             print("user" + user.username)
             if(user is not None):
                 jirgas = Jirga.get(user.jirgas)
-                result = {}
+                result = []
                 self.response.headers['Content-Type'] = 'application/json'
                 for jirga in jirgas:
                     obj2 = {
                         'name': jirga.title,
                         'key': jirga.jirgaId,
                     }
-                    result.update(obj2)
+                    result.append(obj2)
                     print(jirga.title)
                 self.response.out.write(json.dumps(result))
             else:
