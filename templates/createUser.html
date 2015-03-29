@@ -33,6 +33,11 @@
       <form class="form-signin" action="/createUser" method="POST">
           {% if success %}
             <h3 class="form-signin-heading">Account successfully created.</h3>
+            <div>
+                <form action="/home" method="POST">
+                    <button class="btn btn-primary" type="submit">HOME</button>
+                </form>
+            </div>
           <a href="/login"><h3 class="form-signin-heading">Login</h3></a>
           {% else %}
           {% if badPass %}
