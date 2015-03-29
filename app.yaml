@@ -63,6 +63,9 @@ handlers:
 - url: /dist/js/
   static_dir: templates/dist/js
 
+- url: /viewResults(.*?)
+  script: viewResults.app
+
 libraries:
 - name: webapp2
   version: "2.5.2"
