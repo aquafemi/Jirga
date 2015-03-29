@@ -55,6 +55,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         self.response.write("FAIL - insufficient permissions")
                 else:
                    #user was not found
+                    time.sleep(1)
                     self.redirect("/jirgaSettings/"+targetJ.jirgaId)
             else:
                 #jirga was found

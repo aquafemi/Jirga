@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+import time
 import webapp2
 from webapp2_extras import sessions
 import os
@@ -70,6 +71,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 else:
                     self.response.write("OK")
             else:
+                time.sleep(1)
                 self.redirect("/")
 
         else:

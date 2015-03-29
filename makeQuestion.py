@@ -55,8 +55,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         question.put()
                         jirga.questions.append(question.key())
                         jirga.put()
-                        time.sleep(.5)
-                        self.redirect("/viewQuestion/"+question.qId)
+                        time.sleep(1)
+                        self.redirect("/viewQuestion/"+jirga.jirgaId+"/"+question.qId)
                     else:
                         self.response.write("FAIL - insufficient permissions")
                 else:

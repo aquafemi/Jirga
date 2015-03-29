@@ -1,5 +1,6 @@
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
+import time
 import webapp2
 from webapp2_extras import sessions
 import os
@@ -53,6 +54,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 }
             render_template(self,"home.html",template_params)
         else:
+            time.sleep(1)
             self.redirect("/login")
 
 app = webapp2.WSGIApplication([('/', MainHandler)], config=sessions_module.myconfig_dict, debug=True)

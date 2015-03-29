@@ -34,6 +34,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 newJirga.put()
                 user.jirgas.append(newJirga.key())
                 user.put()
+                time.sleep(1)
                 self.redirect("/")
             elif privacyOption == "option2":
                 i = uuid.uuid1()
@@ -41,6 +42,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 newJirga.put()
                 user.jirgas.append(newJirga.key())
                 user.put()
+                time.sleep(1)
                 self.redirect("/")
             else:
                 self.response.write("FAIL - privacy not selected")

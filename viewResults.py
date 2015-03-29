@@ -31,4 +31,4 @@ class MainHandler(sessions_module.BaseSessionHandler):
         else:
             self.response.write("FAIL - you need to be logged in for this")
 
-app = webapp2.WSGIApplication([('/viewResults/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/viewResults/(.*?)/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
