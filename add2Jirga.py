@@ -41,7 +41,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         targetU.put()
                         #todo get rid of these time.sleeps start having better data routes
                         time.sleep(1)
-                        self.redirect("/jirgaSettings/"+targetJirga.jirgaId)
+                        self.redirect("/jirgaSettings/"+targetJ.jirgaId)
                     elif(targetJ.publicJirga == 1) and (targetU.username == user.username):
                         #public jirga, user is adding self
                         user.jirgas.append(targetJ.key())

@@ -6,4 +6,5 @@ class Question(db.Model):
     author = db.StringProperty()
     voted = db.ListProperty(db.Key)
     qId = db.StringProperty()
+    lank = db.StringProperty()
     #comments = db.ListProperty(db.Key)

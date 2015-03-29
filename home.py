@@ -23,15 +23,17 @@ class MainHandler(sessions_module.BaseSessionHandler):
         if(user is not None):
             jirgas = Jirga.all()
             newlist=[]
-            goodQuestions = []
             pubJirgas = []
+            lanks = []
+            questions = []
             for jirga in jirgas:
                 if jirga is not None and (user.key() in jirga.members or jirga.owner == user.username):
                     newlist.append(jirga)
                     for qkey in jirga.questions:
                         question = Question.get(qkey)
                         if question is not None and user.key not in question.voted:
-                            goodQuestions.append(question)
+                            question.lank=(str(jirga.jirgaId) +"/" +str(question.qId))
+                            questions.append(question)
                 elif jirga is not None and jirga.publicJirga==1:
                     pubJirgas.append(jirga)
 
@@ -41,11 +43,11 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 template_params = {
                     'jirgasmem':newlist,
                     'jirgaspub':pubJirgas,
-                    'questions':goodQuestions
+                    'questions':questions
                 }
             else:
                 template_params = {
-                    'questions':goodQuestions, #throws exception when goodQuestions not initialized (due to no Jirgas)
+                    'questions':questions, #throws exception when goodQuestions not initialized (due to no Jirgas)
                     'jirgasmem':jirgas,
                     'jirgaspub':pubJirgas
                 }

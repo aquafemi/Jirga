@@ -39,7 +39,7 @@ handlers:
 - url: /jirgaSettings/(.*?)
   script: jirgaSettings.app
 
-- url: /viewQuestion/(.*?)
+- url: /viewQuestion/(.*?)/(.*?)
   script: viewQuestion.app
 
 - url: /vote

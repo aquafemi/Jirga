@@ -17,15 +17,18 @@ def render_template(handler, template_name, template_values):
 
 class MainHandler(sessions_module.BaseSessionHandler):
 
-    def get(self,questionId):
+    def get(self,jirgaId,questionId):
         loggedIn= False
         user = self.getuser()
         if(user is not None):
             question = Question.all().filter('qId', questionId).get()
+            jirga = Jirga.all().filter('jirgaId', jirgaId).get()
             votes = Vote.get(question.votes)
             template_params = {
                 'question': question,
-                'votes': votes
+                'votes': votes,
+                'user':user,
+                'jirga':jirga
             }
             
             render_template(self,"viewQuestion.html",template_params)
@@ -34,4 +37,4 @@ class MainHandler(sessions_module.BaseSessionHandler):
 
 
 
-app = webapp2.WSGIApplication([('/viewQuestion/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/viewQuestion/(.*?)/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)

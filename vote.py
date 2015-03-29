@@ -16,19 +16,23 @@ class MainHandler(sessions_module.BaseSessionHandler):
     def post(self):
         user = self.getuser()
         if(user is not None):
-            jirgaId = self.request.get('jirgaId')
-            jirga = Jirga.all().filter('jirgaId',jirgaId).get()
+
             questionKey = self.request.get('questionKey')
-            question = Question.get(questionKey)
-            if user.key not in question.voted and user.key in jirga.members:
-                voteNum = self.request.get('voteNum')
-                vote = Vote.get(Question.votes.index(voteNum-1))
-                vote.users.append(user.key)
-                vote.count += 1
-                vote.put()
-                question.voted.append(user.key)
-                question.put()
-                self.redirect()
+            jirgaKey = self.request.get('jirgaId')
+            question = Question.all().filter('qId',questionKey).get()
+            jirga = Jirga.all().filter('jirgaId',jirgaKey).get()
+            voteNum = int(self.request.get('voteselect'))
+            if question is not None and jirga is not None and user.key not in question.voted and user.key() in jirga.members:
+                for v in question.votes:
+                    vc = Vote.get(v)
+                    print(vc.number)
+                    if vc.number == voteNum:
+                        vc.users.append(user.key())
+                        vc.count += 1
+                        vc.put()
+                        question.voted.append(user.key())
+                        question.put()
+                        self.redirect("/viewResults/"+question.qId)
         else:
             self.response.write("FAIL - not logged in")
 
