@@ -28,15 +28,16 @@
 
       <div class="jumbotron text-center">
           <h2>Pose a Question</h2>
-          <form class="form-inline" action="/makeQuestion" method="POST">
-              <h3>Choose a Jirga:</h3>
+          <form class="form-group" action="/makeQuestion" method="POST">
+              <h3>Choose a Jirga</h3>
                 <select name="jirgaId" id="jirgaselect" class="form-control">
                 {% for jirga in jirgas %}
                         <option value="{{ jirga.jirgaId }}">{{ jirga.title }}</option>
                 {% endfor %}
                 </select>
 
-                <div class="span6">
+                <h3>Ask</h3>
+                <div>
                     <textarea name="question" id="question" class="form-control span12" rows="4" cols="20"></textarea>
                 </div>
 
@@ -64,13 +65,15 @@
                     <h4>Vote 5</h4>
                     <input name="vote5" type="text" id="input5" class="form-control">
                 </div>
+                <br>
 
                 <div>
                     <button type="submit" class="btn btn-lg btn-primary" >Submit Question</button>
                 </div>
 
-          </form> <!-- /container -->
+          </form>
       </div>
+    </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
