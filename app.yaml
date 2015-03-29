@@ -63,7 +63,7 @@ handlers:
 - url: /dist/js/
   static_dir: templates/dist/js
 
-- url: /viewResults(.*?)
+- url: /viewResults/(.*?)/(.*?)
   script: viewResults.app
 
 libraries:

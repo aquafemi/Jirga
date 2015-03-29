@@ -15,14 +15,17 @@ def render_template(handler, template_name, template_values):
 
 class MainHandler(sessions_module.BaseSessionHandler):
 
-    def get(self, qId):
+    def get(self, jirgaId, qId):
         user = self.getuser()
         if(user is not None):
             question = Question.all().filter('qId',qId).get()
+            jirga = Jirga.all().filter('jirgaId',jirgaId).get()
             votes = Vote.get(question.votes)
             template_params = {
                 'question':question,
-                'votes':votes
+                'votes':votes,
+                'user':user,
+                'jirga':jirga
             }
             render_template(self,"viewResults.html",template_params)
         else:

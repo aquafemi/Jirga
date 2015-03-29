@@ -32,7 +32,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         vc.put()
                         question.voted.append(user.key())
                         question.put()
-                        self.redirect("/viewResults/"+question.qId)
+                        self.redirect("/viewResults/"+jirga.jirgaId+"/"+question.qId)
         else:
             self.response.write("FAIL - not logged in")
 
