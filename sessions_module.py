@@ -35,8 +35,11 @@ class BaseSessionHandler(webapp2.RequestHandler):
         if self.session.get('sessId'):
             i = str(self.session.get('sessId'))
             sess = Session.all().filter('sessId',i).get()
-            user = User.all().filter('username',sess.user).get()
-            return user
+            if(sess is not None):
+                user = User.all().filter('username',sess.user).get()
+                return user
+            else:
+                return None
         else:
             return None
 #End of BaseSessionHandler Class
