@@ -34,7 +34,12 @@
         <h1>Here are the Jirgas in which you are a member or owner:</h1>
         <ul class="jirga-memberships">
         {% for jirga in jirgasmem %}
-            <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
+            <li class="list-group-item">
+                <a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}} </a>
+                {% if jirga.public == 0 %}
+                    (Private)
+                {% endif %}
+            </li>
         {% endfor %}
         </ul>
         <h1>Here are some public Jirgas you may want to join:</h1>
