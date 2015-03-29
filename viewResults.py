@@ -16,7 +16,7 @@ def render_template(handler, template_name, template_values):
 class MainHandler(sessions_module.BaseSessionHandler):
 
     def get(self, qId):
-        user = self.getUser()
+        user = self.getuser()
         if(user is not None):
             question = Question.all().filter('qId',qId).get()
             votes = Vote.get(question.votes)
@@ -28,4 +28,4 @@ class MainHandler(sessions_module.BaseSessionHandler):
         else:
             self.response.write("FAIL - you need to be logged in for this")
 
-app = webapp2.WSGIApplication([('/viewResults(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
+app = webapp2.WSGIApplication([('/viewResults/(.*?)', MainHandler)], config=sessions_module.myconfig_dict, debug=True)
