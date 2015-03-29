@@ -25,6 +25,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 #private jirga
                 template_params = {
                     'public':public,
+                    'loggedIn':True
                 }
             else:
                 #public
@@ -36,7 +37,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     member = 0
                 template_params = {
                     'public':public,
-                    'member':member
+                    'member':member,
+                    'loggedIn':True
                 }
             member = User.get(jirga.members)
             obj2={'members':member}
@@ -65,7 +67,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 self.session['sessId']=str(i)
                 loggedIn = True
                 template_params={'loggedIn':loggedIn,
-                                'user': user.username}
+                                'user': user.username,
+                                }
                 render_template(self,'login.html',template_params)
             else:
                 #no user found/something went wrong

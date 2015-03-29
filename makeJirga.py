@@ -18,7 +18,7 @@ def render_template(handler, template_name, template_values):
 
 class MainHandler(sessions_module.BaseSessionHandler):
     def get(self):
-        template_params = {}
+        template_params = {'loggedIn':True}
         render_template(self, "makeJirga.html", template_params)
 
     # post:

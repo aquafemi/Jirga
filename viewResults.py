@@ -23,10 +23,19 @@ def calculateJirga(votes,jirga):
         for voter in voters:
             for modVote in modVotes:
                 if voter.username == modVote.user:
-                    print("woo")
-                    sum += int(str(modVote.reward)) + 1
+                    if(modVote.reward is not None):
+                        print("YAY" + str(modVote.reward))
+                        print(int(str(modVote.reward)))
+                        sum += int(str(modVote.reward))* + 1
         votes2.append(sum)
     return votes2
+
+
+def getYield(jirga, votes):
+    totalVotes = 0
+    for v in votes:
+        totalVotes+=v.count
+    return 100*float(totalVotes)/float(len(jirga.members))
 
 
 class MainHandler(sessions_module.BaseSessionHandler):
@@ -38,12 +47,16 @@ class MainHandler(sessions_module.BaseSessionHandler):
             jirga = Jirga.all().filter('jirgaId',jirgaId).get()
             votes = Vote.get(question.votes)
             votes2 = calculateJirga(votes,jirga)
+            yieldy = getYield(jirga,votes)
+            logIn = True
             template_params = {
                 'question':question,
                 'votes':votes,
                 'user':user,
                 'jirga':jirga,
-                'votes2':votes2
+                'votes2':votes2,
+                'loggedIn':True,
+                'yield':yieldy
             }
             render_template(self,"viewResults.html",template_params)
         else:

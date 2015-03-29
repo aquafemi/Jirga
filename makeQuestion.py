@@ -26,7 +26,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
             for jirga in jirgas:
                 if jirga is not None and (user.key() in jirga.members or jirga.owner == user.username):
                     newlist.append(jirga)
-            template_params = {'jirgas':newlist}
+            template_params = {'jirgas':newlist,'loggedIn':True}
             render_template(self,"askJirga.html",template_params)
         else:
             self.response.write("FAIL - not logged in")

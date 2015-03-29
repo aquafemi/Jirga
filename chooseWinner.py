@@ -29,6 +29,8 @@ class MainHandler(sessions_module.BaseSessionHandler):
                                     print(modVote.user)
                                     print(voter.username)
                                     if(voter.username == modVote.user):
+                                        if modVote.reward is  None:
+                                            modVote.reward = 0
                                         modVote.reward += 1
                                         modVote.put()
                                         self.redirect("/viewResults/"+jirga.jirgaId+"/"+question.qId)

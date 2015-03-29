@@ -43,13 +43,15 @@ class MainHandler(sessions_module.BaseSessionHandler):
                 template_params = {
                     'jirgasmem':newlist,
                     'jirgaspub':pubJirgas,
-                    'questions':questions
+                    'questions':questions,
+                    'logggedIn':True
                 }
             else:
                 template_params = {
                     'questions':questions, #throws exception when goodQuestions not initialized (due to no Jirgas)
                     'jirgasmem':newlist,
-                    'jirgaspub':pubJirgas
+                    'jirgaspub':pubJirgas,
+                    'logggedIn':True
                 }
             render_template(self,"home.html",template_params)
         else:
