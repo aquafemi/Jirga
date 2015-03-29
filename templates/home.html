@@ -11,8 +11,10 @@
     <title>Home Page</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
+      <link href="http://getbootstrap.com/examples/navbar/navbar.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+      <link href="dist/css/custom-button.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,6 +27,23 @@
 <body>
 
     <div class="container">
+
+        <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class = "navbar-brand">Jirga</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if not loggedIn %}
+              <li><a href="/login">Log In</a></li>
+              <li><a href="/createUser">Sign Up</a></li>
+              {% else %}
+              <li><a href="/home">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
         <h1>Here are the Jirga questions on which you can vote:</h1>
         <ul class="jirga-memberships">
         {% for question in questions %}
@@ -48,18 +67,21 @@
             <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
         {% endfor %}
         </ul>
-
-        <form action ="../makeQuestion" method="GET">
-            <button class ="btn btn-primary btn-block">Ask A Question</button>
-        </form>
-
-        <form action = "../logout" method = "POST">
-            <button type="submit" class ="btn btn-primary btn-block">Logout</button>
-        </form>
-
-        <form action ="../makeJirga" method="GET">
-            <button class ="btn btn-primary btn-block">Make A New Jirga</button>
-        </form>
+        <div class="col-lg-12">
+            <form action ="/makeQuestion" method="GET">
+                <button type="submit"class ="btn btn-custom btn-block">Ask A Question</button>
+            </form>
+        </div><div class="col-lg-12"></div>
+        <div class="col-lg-12">
+            <form action = "/logout" method = "POST">
+                <button class ="btn btn-custom btn-block">Logout</button>
+             </form>
+        </div><div class="col-lg-12"></div>
+        <div class="col-lg-12">
+            <form action ="/makeJirga" method="GET">
+                <button class ="btn btn-custom btn-block">Make A New Jirga</button>
+            </form>
+        </div><div class="col-lg-12"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

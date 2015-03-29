@@ -11,8 +11,13 @@
     <title>Make Jirga</title>
 
      <!-- Bootstrap core CSS -->
-    <link href="https://bootswatch.com/cerulean/bootstrap.min.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
+
+
+      <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+      <link href="dist/css/custom-button.css" rel="stylesheet">
+
+      <link href="http://getbootstrap.com/examples/navbar/navbar.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -21,19 +26,36 @@
     <![endif]-->
 </head>
 <body>
-
+<div class="container">
+<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class = "navbar-brand">Jirga</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if not loggedIn %}
+              <li><a href="/login">Log In</a></li>
+              <li><a href="/createUser">Sign Up</a></li>
+              {% else %}
+              <li><a href="/home">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</div>
     <div class = "container text-center">
         <form class="form-group" action = "makeJirga" method="POST">
-            <input name="jirgaName" type="text" class="input-large" placeholder="Jirga Name" required="required">
+            <input name="jirgaName" type="text" class="form-signin" placeholder="Jirga Name" required="required">
             <label class="radio">
                 <input type="radio" name="privacyOption" id = "public"
-                       value="option1" required> Public
+                       value="option1" required>Public
             </label>
              <label class="radio">
                 <input type="radio" name="privacyOption" id = "private"
-                        value="option2" required> Private
+                        value="option2" required>Private
             </label>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-custom">Create</button>
         </form>
     </div>
 

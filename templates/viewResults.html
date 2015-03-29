@@ -10,8 +10,13 @@
 
     <title>View Results</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://bootswatch.com/superhero/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
+
+
+      <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+      <link href="dist/css/custom-button.css" rel="stylesheet">
+
+      <link href="http://getbootstrap.com/examples/navbar/navbar.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 
@@ -23,40 +28,42 @@
 
 </head>
  <body>
-
-    <div class="container-fluid">
-        <div class="jumbotron">
+    <div class="container">
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+          <a class = "navbar-brand">Jirga</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if not loggedIn %}
+              <li><a href="/login">Log In</a></li>
+              <li><a href="/createUser">Sign Up</a></li>
+              {% else %}
+              <li><a href="/home">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="well well-lg">
+            <div class="row">
+                <h2 style="color:purple;">Results:</h2>
+            </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Results</h1>
                     <h2>{{question.questionString}}</h2>
-                    <h3>-asked by{{question.author}}</h3>
-                    <h3>Yield: {{question.percentage}} - {{jirga.memberCount}} participants</h3>
+                    <h3>asked by {{question.author}}</h3>
+                    <h3>Yield: {{question.percentage}}% - {{jirga.memberCount}} participants</h3>
                 </div>
-                <div class="col-md-2 col-md-offset-3">
-                    <p>The Jirga Recommends:</p>
+                <div class="col-md-3 col-md-offset-3">
+                    <h4>The Recommendation:</h4>
                 </div>
-                <div class="col-md-1 col-md-offset-3">
-                    <div class="row">
-                        <p>Vote 1</p>
-                    </div>
-                    <div class="row">
-                        <p>Vote 2</p>
-                    </div>
-                    <div class="row">
-                        <p>Vote 3</p>
-                    </div>
-                    <div class="row">
-                        <p>Vote 4</p>
-                    </div>
-                    <div class="row">
-                        <p>Vote 5</p>
-                    </div>
-                </div>
-                <div class="col-md-1">
+                <div class="col-md-3 col-md-offset-3">
                     {% for vote in votes %}
-                    <div class="row text-center">
-                        <p>{{ vote.count }}</p>
+                    <div class="row">
+                        <h4>{{vote.number}} - {{ vote.count }} votes</h4>
                     </div>
                     {% endfor %}
                 </div>
@@ -67,11 +74,11 @@
     <div class = "container">
         {% for vote in votes %}
         <div class="panel panel-default">
-            <h3 class = "text-left"">{{ vote.answer }} </h3>
-            <h4 class = "text-right"">Votes: {{ vote.count }}</h4>
+            <h3 class = "text-left">{{ vote.answer }} </h3>
+            <h4 class = "text-right">Votes: {{ vote.count }}</h4>
             {% if question.author == user.username %}
             <form action = "/chooseWinner" method = "POST">
-                <button type="submit" class ="btn btn-success">Choose</button>
+                <button type="submit" class ="btn btn-custom">Choose</button>
             </form>
             {% endif %}
         </div>
