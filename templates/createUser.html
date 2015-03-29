@@ -26,7 +26,10 @@
   <body>
 
     <div class="container">
-        
+
+        <!--possible fix to login triggering this page?-->
+        <!--{% if not loggedIn %}-->
+        <!--{% else %}-->
       <form class="form-signin" action="/createUser" method="POST">
           {% if success %}
             <h3 class="form-signin-heading">Account successfully created.</h3>
@@ -46,6 +49,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
           {% endif %}
       </form>
+        <!--{% endif %}-->
     </div> <!-- /container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

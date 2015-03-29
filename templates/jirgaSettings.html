@@ -24,7 +24,7 @@
 <body>
 
 <!-- Docs page layout -->
-    <div class="bs-docs-header" id="content" tabindex="-1">
+    <div class="bs-docs-header">
       <div class="container">
         <h2>Jirga Settings for</h2>
           <h1>{{jirga.jirgaName}}</h1>
@@ -42,52 +42,30 @@
                 {% endfor %}
             </select>
             <button type="submit" class="btn btn-default" >Remove member from the Jirga</button>
-            <form class="form-horizontal" action="/add2Jirga" method="POST">
+            <form class="form-horizontal">
                 <div class="form-group">
                     <label for="user" class="col-sm-2 control-label">Add a user to this Jirga:</label>
-                    <div class="col-sm-7">
-                        <input name = "user" type="text" class="form-control" id="user">
+                    <div class="col-sm-9">
+                        <input name = "userName" type="text" class="form-control" id="user">
                      </div>
-                </div>
-                <div class="form-horizontal col-sm-offset-2 col-sm-10" >
-
+                    <div class="form-horizontal" action="/addUser" method="POST">
                         <button type="submit" class="btn btn-default">Add User</button>
-                        <input type="hidden" name="jirga" value={{ jirga.jirgaId }}>
-
+                    </div>
                 </div>
             </form>
             {% else %}
                 <h2>There are currently {{ members|length }} members in this Jirga.</h2>
-                <form id="removeOther" action="/removeFromJirga" method="POST">
+
                 <select id="memberselect" class="form-control">
                 {% for member in members %}
                         <option value="{{ member.key.id }}">{{ member.username }}</option>
                 {% endfor %}
                 </select>
-                </form>
-                <script>$("#removeOther").submit( function(eventObj){
-                 $(this).append('<input type="hidden" name="jirga" value="{{jirga.jirgaId}}" /> ');
-                return true;
-                });</script>
+
                 {% if member == 0 %}
-
-
-                    <form id="addMe" action="/add2Jirga" method="POST">
                     <button type="submit" class="btn btn-default">Add me to this Jirga!</button>
-                         <input type="hidden" name="jirga" value={{ jirga.jirgaId }}>
-                        <input type="hidden" name="user" value={{ user.username }}>
-                    </form>
-
                 {% else %}
-                    <form id="removeMe" action="/removeFromJirga" method="POST">
                     <button type="submit" class="btn btn-default">Remove me from this Jirga!</button>
-                        <input type="hidden" name="jirga" value={{ jirga.jirgaId }}>
-                        <input type="hidden" name="user" value={{ user.username }}>
-                    </form>
-            <script>$("#removeMe").submit( function(eventObj){
-                 $(this).append('<input type="hidden" name="jirga" value="{{jirga.jirgaId}}" /> ');
-                return true;
-                });</script>
                 {% endif %}
             {% endif %}
             </div>
