@@ -66,6 +66,9 @@ handlers:
 - url: /viewResults/(.*?)/(.*?)
   script: viewResults.app
 
+- url: /chooseWinner
+  script: chooseWinner.app
+
 libraries:
 - name: webapp2
   version: "2.5.2"

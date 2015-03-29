@@ -11,5 +11,5 @@ class Jirga(db.Model):
 
 class ModVote(db.Model):
     jirgaId = db.StringProperty()
-    user = db.Key()
+    user = db.StringProperty()
     reward = db.IntegerProperty()

@@ -54,9 +54,9 @@
                     </div>
                 </div>
                 <div class="col-md-1">
-                    {% for vote in votes %}
+                    {% for vote in votes2 %}
                     <div class="row text-center">
-                        <p>{{ vote.count }}</p>
+                        <p>{{ vote }}</p>
                     </div>
                     {% endfor %}
                 </div>
@@ -71,7 +71,10 @@
             <h4 class = "text-right"">Votes: {{ vote.count }}</h4>
             {% if question.author == user.username %}
             <form action = "/chooseWinner" method = "POST">
-                <button type="submit" class ="btn btn-success">Choose</button>
+                <button type="submit" class ="btn btn-success">Choose - reward your Jirga members who decided wisely with more influence.</button>
+                <input type="hidden" name="questionId" value="{{ question.qId }}">
+                <input type="hidden" name="voteNum" value="{{ vote.number }}">
+                <input type="hidden" name="jirga" value="{{ jirga.jirgaId }}">
             </form>
             {% endif %}
         </div>

@@ -5,7 +5,8 @@ from webapp2_extras import sessions
 import os
 import sessions_module
 from model.User import User,Session
-from model.Jirga import Jirga
+from model.Jirga import Jirga, ModVote
+
 
 class MainHandler(sessions_module.BaseSessionHandler):
 
@@ -37,6 +38,10 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         if flag:
                             targetU.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
+                        print(targetU.username)
+                        newMV = ModVote(user=targetU.username,reward=0,jirgaId=targetJ.jirgaId)
+                        newMV.put()
+                        targetJ.modVotes.append(newMV.key())
                         targetJ.put()
                         targetU.put()
                         #todo get rid of these time.sleeps start having better data routes
@@ -46,6 +51,10 @@ class MainHandler(sessions_module.BaseSessionHandler):
                         #public jirga, user is adding self
                         user.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
+                        print(targetU.username)
+                        newMV = ModVote(user=targetU.username,reward=0,jirgaId=targetJ.jirgaId)
+                        newMV.put()
+                        targetJ.modVotes.append(newMV.key())
                         user.put()
                         targetJ.put()
                         time.sleep(1)
