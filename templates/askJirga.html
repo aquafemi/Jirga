@@ -11,7 +11,10 @@
     <title>Make Question</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+      <link href="dist/css/custom-button.css" rel="stylesheet">
+      <link href="http://getbootstrap.com/examples/navbar/navbar.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -22,6 +25,26 @@
 
 </head>
  <body>
+
+ <div class="container">
+
+        <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class = "navbar-brand">Jirga</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if not loggedIn %}
+              <li><a href="/login">Log In</a></li>
+              <li><a href="/createUser">Sign Up</a></li>
+              {% else %}
+              <li><a href="/home">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+     </div>
 
 
     <div class="container">
@@ -68,7 +91,7 @@
                 <br>
 
                 <div>
-                    <button type="submit" class="btn btn-lg btn-primary" >Submit Question</button>
+                    <button type="submit" class="btn btn-lg btn-custom" >Submit Question</button>
                 </div>
 
           </form>

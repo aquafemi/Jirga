@@ -10,11 +10,14 @@
 
     <title>Login</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/lumen/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+
+      <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+      <link href="dist/css/custom-button.css" rel="stylesheet">
+
+      <link href="http://getbootstrap.com/examples/navbar/navbar.css" rel="stylesheet">
+
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -22,10 +25,25 @@
     <![endif]-->
 
   </head>
-
   <body>
 
     <div class="container">
+        <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class = "navbar-brand">Jirga</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              {% if not loggedIn %}
+              <li><a href="/login">Log In</a></li>
+              <li><a href="/createUser">Sign Up</a></li>
+              {% else %}
+              <li><a href="/home">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
         {% if not loggedIn %}
       <form class="form-signin" action="/login" method="POST">
           {%if loginError %}
@@ -36,7 +54,7 @@
         <input name="username" type="text" id="inputName" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-custom btn-block" type="submit">Be excellent to each other >></button>
           <center><a href="/createUser"><h4>Make an Account</h4></a></center>
       </form>
         {% else %}
