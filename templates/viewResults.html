@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>View Results Template</title>
+    <title>View Results</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://bootswatch.com/superhero/bootstrap.min.css" rel="stylesheet">
@@ -24,17 +24,56 @@
 </head>
  <body>
 
-    <div class="jumbotron">
-        <h1>Results</h1>
-        <h2>{{question.questionString}}</h2>
-        <h3>-{{question.author}}</h>
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Results</h1>
+                    <h2>{{question.questionString}}</h2>
+                    <h3>-asked by{{question.author}}</h3>
+                    <h3>Yield: {{question.percentage}} - {{jirga.memberCount}} participants</h3>
+                </div>
+                <div class="col-md-2 col-md-offset-3">
+                    <p>The Jirga Recommends:</p>
+                </div>
+                <div class="col-md-1 col-md-offset-3">
+                    <div class="row">
+                        <p>Vote 1</p>
+                    </div>
+                    <div class="row">
+                        <p>Vote 2</p>
+                    </div>
+                    <div class="row">
+                        <p>Vote 3</p>
+                    </div>
+                    <div class="row">
+                        <p>Vote 4</p>
+                    </div>
+                    <div class="row">
+                        <p>Vote 5</p>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    {% for vote in votes %}
+                    <div class="row text-center">
+                        <p>{{ vote.count }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class = "container">
         {% for vote in votes %}
-        <div class="jumbotron">
-            <div class = "text-left""><h3>{{ vote.answer }} :</h3></div>
-            <div class = "text-right"><h3>Votes: {{ vote.count }}</h3></div>
+        <div class="panel panel-default">
+            <h3 class = "text-left"">{{ vote.answer }} </h3>
+            <h4 class = "text-right"">Votes: {{ vote.count }}</h4>
+            {% if question.author == user.username %}
+            <form action = "/chooseWinner" method = "POST">
+                <button type="submit" class ="btn btn-success">Choose</button>
+            </form>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
