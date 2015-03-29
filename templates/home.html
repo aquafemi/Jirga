@@ -43,9 +43,17 @@
             <li class="list-group-item"><a href="jirgaSettings/{{jirga.jirgaId}}">{{jirga.title}}</a></li>
         {% endfor %}
         </ul>
-        <button class ="btn btn-primary btn-block" a = "/makeQuestion">Ask A Question</button>
-        <form action = "/logout" method = "POST">
-            <button class ="btn btn-primary btn-block" method = "/makeQuestion">Logout</button>
+
+        <form action ="../makeQuestion" method="POST">
+            <button class ="btn btn-primary btn-block">Ask A Question</button>
+        </form>
+
+        <form action = "../logout" method = "POST">
+            <button type="submit" class ="btn btn-primary btn-block">Logout</button>
+        </form>
+
+        <form action ="../makeJirga" method="POST">
+            <button class ="btn btn-primary btn-block">Make A New Jirga</button>
         </form>
     </div>
 
