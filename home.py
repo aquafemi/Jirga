@@ -25,7 +25,6 @@ class MainHandler(sessions_module.BaseSessionHandler):
             jirgas = Jirga.all()
             newlist=[]
             pubJirgas = []
-            lanks = []
             questions = []
             for jirga in jirgas:
                 if jirga is not None and (user.key() in jirga.members or jirga.owner == user.username):
@@ -49,7 +48,7 @@ class MainHandler(sessions_module.BaseSessionHandler):
             else:
                 template_params = {
                     'questions':questions, #throws exception when goodQuestions not initialized (due to no Jirgas)
-                    'jirgasmem':jirgas,
+                    'jirgasmem':newlist,
                     'jirgaspub':pubJirgas
                 }
             render_template(self,"home.html",template_params)
