@@ -65,10 +65,7 @@
                 {% endfor %}
                 </select>
                 </form>
-                <script>$("#removeOther").submit( function(eventObj){
-                 $(this).append('<input type="hidden" name="jirga" value="{{jirga.jirgaId}}" /> ');
-                return true;
-                });</script>
+
                 {% if member == 0 %}
 
 
@@ -84,10 +81,6 @@
                         <input type="hidden" name="jirga" value={{ jirga.jirgaId }}>
                         <input type="hidden" name="user" value={{ user.username }}>
                     </form>
-            <script>$("#removeMe").submit( function(eventObj){
-                 $(this).append('<input type="hidden" name="jirga" value="{{jirga.jirgaId}}" /> ');
-                return true;
-                });</script>
                 {% endif %}
             {% endif %}
             </div>
