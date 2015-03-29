@@ -21,22 +21,19 @@ class MainHandler(sessions_module.BaseSessionHandler):
     def get(self):
         user = self.getuser()
         if(user is not None):
-            jirgas = Jirga.get(user.jirgas)
+            jirgas = Jirga.all()
             newlist=[]
-            idList=[]
             goodQuestions = []
+            pubJirgas = []
             for jirga in jirgas:
-                if jirga is not None and jirga.jirgaId not in idList:
+                if jirga is not None and (user.key() in jirga.members or jirga.owner == user.username):
                     newlist.append(jirga)
-                    idList.append(jirga.jirgaId)
                     for qkey in jirga.questions:
                         question = Question.get(qkey)
                         if question is not None and user.key not in question.voted:
                             goodQuestions.append(question)
-
-            pubJirgas = []
-            pubJirga = Jirga.all().filter('publicJirga',1).get()
-            pubJirgas.append(pubJirga)
+                elif jirga is not None and jirga.publicJirga==1:
+                    pubJirgas.append(jirga)
 
             #check to avoid throwing unbounderror when no jirgas
             #todo - make this give a warning when no jirgas

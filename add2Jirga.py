@@ -29,7 +29,12 @@ class MainHandler(sessions_module.BaseSessionHandler):
                     #user was found
                     if(targetJ.publicJirga == 0) and (targetJ.owner == user.username):
                         #private jirga but user owns it
-                        if targetJ.key not in targetU.jirgas:
+                        flag = True;
+                        for key in targetU.jirgas:
+                            if key == targetJ.key:
+                                print(key() + "    -     " + targetJ.key())
+                                flag = False
+                        if flag:
                             targetU.jirgas.append(targetJ.key())
                         targetJ.members.append(targetU.key())
                         targetJ.put()
